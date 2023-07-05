@@ -16,24 +16,50 @@ using TimeLineControl;
 
 namespace TimeLineTestApp
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-		TimeLineData timeLineData = new TimeLineData();
-		public MainWindow()
-		{
-			InitializeComponent();
-			timeLineData.AddEntry(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(3), "Test 1", null);
-			timeLineData.AddEntry(TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(2), "Test 2", null);
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+            TimeLineData = new TimeLineData()
+                .Initialize(DurationUnit.Seconds, 5, 0.3);
+            TimeLineData
+                .AddEntry(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(3), "Test 1", null)
+                .MakeMovable();
+            TimeLineData
+                .AddEntry(TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(2), "Test 2", null);
+            TimeLineData
+                .AddEntry(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), "Test 3", null);
+            TimeLineData
+                .AddEntry(TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(0.5), "Test 4", null)
+                .LockDuration();
+            //timeLine.TotalDuration = TimeSpan.FromSeconds(5);
+        }
 
-			timeLine.ItemsSource = timeLineData.Entries;
-			timeLine.MinEntryDuration = 0.3;
+        #region Timeline data
+        public TimeLineData TimeLineData
+        {
+            get => (TimeLineData)GetValue(TimeLineDataProperty);
+            set => SetValue(TimeLineDataProperty, value);
+        }
+        public static readonly DependencyProperty TimeLineDataProperty =
+            DependencyProperty.Register(
+                "TimeLineData",
+                typeof(TimeLineData),
+                typeof(MainWindow),
+                new PropertyMetadata(new TimeLineData(), new PropertyChangedCallback(OnTimeLineDataChanged)));
 
-			timeLineData.AddEntry(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), "Test 3", null);
-			timeLineData.AddEntry(TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(0.5), "Test 4", null).DurationLocked = true;
-			//timeLine.TotalDuration = TimeSpan.FromSeconds(5);
-		}
-	}
+        private static void OnTimeLineDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MainWindow p)
+            {
+                /// Your OnChanged CODE       
+            }
+        }
+        #endregion
+
+    }
 }

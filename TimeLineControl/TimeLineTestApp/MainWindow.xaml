@@ -6,10 +6,12 @@
         xmlns:local="clr-namespace:TimeLineTestApp"
         xmlns:tl="clr-namespace:TimeLineControl;assembly=TimeLineControl"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterOwner" Left="3000" Top="-1000">
+        x:Name="This"
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Grid>
-		<tl:TimeLine Background="White" x:Name="timeLine" TotalDuration="0:0:5">
-
-		</tl:TimeLine>
-	</Grid>
+        <tl:TimeLine 
+            Background="White" 
+            x:Name="timeLine" 
+            TimeLineData="{Binding ElementName=This,Path=TimeLineData}"/>
+    </Grid>
 </Window>

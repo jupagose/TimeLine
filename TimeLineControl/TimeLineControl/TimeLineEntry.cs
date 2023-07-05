@@ -69,7 +69,7 @@ namespace TimeLineControl
 			}
 		}
 
-
+		public bool CanBeMoved { get; set; }
 
 		public bool CanResize
 		{

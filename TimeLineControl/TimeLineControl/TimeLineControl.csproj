@@ -57,6 +57,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DurationMeasureUnits.cs" />
     <Compile Include="FrmSetDuration.xaml.cs">
       <DependentUpon>FrmSetDuration.xaml</DependentUpon>
     </Compile>
@@ -66,8 +67,10 @@
       <DependentUpon>TimeLine.xaml</DependentUpon>
     </Compile>
     <Compile Include="TimeLineData.cs" />
+    <Compile Include="TimeLineDataExtensions.cs" />
     <Compile Include="TimeLineEntry.cs" />
     <Compile Include="TimeLineEntryConverter.cs" />
+    <Compile Include="TimeLineEntryExtensions.cs" />
     <Page Include="FrmSetDuration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
